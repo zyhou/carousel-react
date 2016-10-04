@@ -9,9 +9,6 @@ class Carousel extends Component {
             index: 0,
             direction: 'right'
         };
-
-        this.next = this.next.bind(this);
-        this.prev = this.prev.bind(this);
     };
 
     next() {
@@ -24,10 +21,21 @@ class Carousel extends Component {
         this.setState({ index: prevSlide, direction: 'left' });
     }
 
+    goto(indexButton) {
+
+    }
+
     render() {
 
+        let indexCourant = this.state.index 
+        
+        let buttonsPagination = this.props.imgs.map(function (img, i) {
+            let buttonActive = (indexCourant === i) ? 'active' : ''
+            return (<button key={i} onClick={() => this.goto(i)} className={buttonActive}></button>)
+        })
+
         return (
-            <div className="carousel">
+            <div className="carousel" >
                 <ReactCSSTransitionGroup
                     transitionName={"translate-" + this.state.direction}
                     transitionEnterTimeout={500}
@@ -36,9 +44,12 @@ class Carousel extends Component {
                     className="carousel-slider">
                     <img key={this.state.index} src={this.props.imgs[this.state.index]} role="presentation"/>
                 </ReactCSSTransitionGroup>
-                <button className="carousel-nav carousel-next" onClick={this.next}></button>
-                <button className="carousel-nav carousel-prev" onClick={this.prev}></button>
-            </div>
+                <button className="carousel-nav carousel-next" onClick={() => this.next()}></button>
+                <button className="carousel-nav carousel-prev" onClick={() => this.prev()}></button>
+                <div className="carousel-pagination">
+                    {buttonsPagination}
+                </div>
+            </div >
         );
     }
 }
