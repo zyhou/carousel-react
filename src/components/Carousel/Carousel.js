@@ -32,9 +32,7 @@ class Carousel extends Component {
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                     component="div"
-                    className="carousel-slider"
-                    transitionAppear={true}
-                    transitionAppearTimeout={1000}>
+                    className="carousel-slider">
                     <img key={this.state.index} src={this.props.imgs[this.state.index]} role="presentation"/>
                 </ReactCSSTransitionGroup>
                 <button className="carousel-nav carousel-next" onClick={this.next}></button>
