@@ -1,0 +1,20 @@
+.carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    margin-top: -31px;
+    left: 10px;
+    background: url('./asset/prev.png');
+    width: 63px;
+    height: 63px;
+}
+
+.carousel-nav.carousel-next {
+    right: 10px;
+    left: auto;
+    background-image: url('./asset/next.png')
+}

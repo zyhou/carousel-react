@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import CarouselSlide from './CarouselSlide.js';
+import './Carousel.css';
 
 class Carousel extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            index: 0
+            index: 0,
+            slides: this.props.imgs
         };
 
         this.next = this.next.bind(this);
@@ -13,26 +15,35 @@ class Carousel extends Component {
     };
 
     next() {
-        this.setState({index: this.state.index++});
+        let i = this.state.index + 1
+        if (i >= this.state.slides.length) {
+           i = 0
+        }
+        this.setState({ index: i });
     }
 
     prev() {
-        this.setState({index: this.state.index--});
+        let i = this.state.index - 1
+        if (i < 0) {
+            i = this.state.slides.length - 1
+        }
+        this.setState({ index: i });
     }
 
     render() {
-        let index = this.state.index;
-        let slides = this.props.imgs.map(function (img, i) {
-            return (<CarouselSlide key={i} index={i} indexVisible={index} img={img} />)
+        let indexCourant = this.state.index;
+
+        let slides = this.state.slides.map(function (img, i) {
+            return (<CarouselSlide key={i} index={i} indexVisible={indexCourant} img={img} />)
         })
 
         return (
             <div className="carousel">
-                <div className="carousel carousel-slider center">
+                <div className="carousel-slider">
                     {slides}
                 </div>
-                <button className="carousel-next" onClick={this.next}>Suivant</button>
-                <button className="carousel-prev" onClick={this.prev}>Précédent</button>
+                <button className="carousel-nav carousel-next" onClick={this.next}></button>
+                <button className="carousel-nav carousel-prev" onClick={this.prev}></button>
             </div>
         );
     }

@@ -4,18 +4,16 @@ import './CarouselSlide.css';
 class CarouselSlide extends Component {
 
   visible() {
-    return this.props.index === this.props.indexVisible
+    return (this.props.index === this.props.indexVisible)
   }
 
   render() {
 
-    let visibility = this.visible ? "" : "hidden"
+    let visibility = this.visible() ? "" : "hidden"
 
     return (
-      <div className={"carousel-item" + visibility}>
-        index: { this.props.index }
-        Visible? {this.visible}
-        img: {this.props.img}
+      <div className={"carousel-item " + visibility}>
+        <img src={this.props.img} role="presentation" />
       </div>
     );
   }
