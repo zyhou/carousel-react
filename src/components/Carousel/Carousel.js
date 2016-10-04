@@ -10,16 +10,16 @@ class Carousel extends Component {
     };
 
     componentDidMount() {
-        this.state.slides.forEach((slide, i) => {
-            console.log(slide.props.children)
-            console.log(slide)
-        })
+        // this.state.slides.forEach((slide, i) => {
+        //     console.log(slide.props.children)
+        //     console.log(slide)
+        // })
     };
 
     render() {
         return (
             <div className="carousel carousel-slider center">
-                {this.props.children}
+                {this.state.slides}
             </div>
         );
     }

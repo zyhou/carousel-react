@@ -8,12 +8,8 @@ class App extends Component {
     return (
 
       <Carousel>
-        <CarouselSlide>
-          <h2>Salut les gens 1</h2>
-        </CarouselSlide>
-        <CarouselSlide>
-          <h2>Salut les gens 2</h2>
-        </CarouselSlide>
+        <CarouselSlide index={0} img="Salut les gens 1" />
+        <CarouselSlide index={1} img="Salut les gens 2" />
       </Carousel>
     );
   }
