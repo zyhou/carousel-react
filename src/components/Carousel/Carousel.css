@@ -4,17 +4,49 @@
 }
 
 .carousel-nav {
+    cursor: pointer;
     position: absolute;
+    background: url('./asset/prev.png');
     top: 50%;
     margin-top: -31px;
     left: 10px;
-    background: url('./asset/prev.png');
     width: 63px;
     height: 63px;
 }
 
-.carousel-nav.carousel-next {
+.carousel-next {
+    background: url('./asset/next.png');
     right: 10px;
     left: auto;
-    background-image: url('./asset/next.png')
+}
+
+.carousel-slider img {
+    width: 100%
+}
+
+.translate-enter {
+    transform: translateX(100%);
+}
+
+.translate-enter.translate-enter-active {
+    transform: translateX(0);
+    transition: all 500ms ease-in-out;
+}
+
+.translate-leave {
+    transform: translateX(0);
+}
+
+.translate-leave.translate-leave-active {
+    transform: translateX(-100%);
+    transition: all 500ms ease-in-out;
+}
+
+.translate-appear{
+    filter: grayscale(100%);
+    transition: all 1000ms ease-in-out;
+}
+
+.translate-appear.translate-appear-active{
+    filter: grayscale(0);
 }

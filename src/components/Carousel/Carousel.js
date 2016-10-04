@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import CarouselSlide from './CarouselSlide.js';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './Carousel.css';
 
 class Carousel extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            index: 0,
-            slides: this.props.imgs
+            index: 0
         };
 
         this.next = this.next.bind(this);
@@ -15,33 +14,29 @@ class Carousel extends Component {
     };
 
     next() {
-        let i = this.state.index + 1
-        if (i >= this.state.slides.length) {
-           i = 0
-        }
-        this.setState({ index: i });
+        let nextSlide = this.state.index + 1 < this.props.imgs.length ? this.state.index + 1 : 0;
+        this.setState({ index: nextSlide });
     }
 
     prev() {
-        let i = this.state.index - 1
-        if (i < 0) {
-            i = this.state.slides.length - 1
-        }
-        this.setState({ index: i });
+        var prevSlide = this.state.index - 1 < 0 ? this.props.imgs.length - 1 : this.state.index - 1;
+        this.setState({ index: prevSlide });
     }
 
     render() {
-        let indexCourant = this.state.index;
-
-        let slides = this.state.slides.map(function (img, i) {
-            return (<CarouselSlide key={i} index={i} indexVisible={indexCourant} img={img} />)
-        })
 
         return (
             <div className="carousel">
-                <div className="carousel-slider">
-                    {slides}
-                </div>
+                <ReactCSSTransitionGroup
+                    transitionName="translate"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                    component="div"
+                    className="carousel-slider"
+                    transitionAppear={true}
+                    transitionAppearTimeout={1000}>
+                    <img key={this.state.index} src={this.props.imgs[this.state.index]} role="presentation"/>
+                </ReactCSSTransitionGroup>
                 <button className="carousel-nav carousel-next" onClick={this.next}></button>
                 <button className="carousel-nav carousel-prev" onClick={this.prev}></button>
             </div>
