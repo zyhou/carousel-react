@@ -6,7 +6,8 @@ class Carousel extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            index: 0
+            index: 0,
+            direction: 'right'
         };
 
         this.next = this.next.bind(this);
@@ -15,12 +16,12 @@ class Carousel extends Component {
 
     next() {
         let nextSlide = this.state.index + 1 < this.props.imgs.length ? this.state.index + 1 : 0;
-        this.setState({ index: nextSlide });
+        this.setState({ index: nextSlide, direction: 'right' });
     }
 
     prev() {
         var prevSlide = this.state.index - 1 < 0 ? this.props.imgs.length - 1 : this.state.index - 1;
-        this.setState({ index: prevSlide });
+        this.setState({ index: prevSlide, direction: 'left' });
     }
 
     render() {
@@ -28,7 +29,7 @@ class Carousel extends Component {
         return (
             <div className="carousel">
                 <ReactCSSTransitionGroup
-                    transitionName="translate"
+                    transitionName={"translate-" + this.state.direction}
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                     component="div"
