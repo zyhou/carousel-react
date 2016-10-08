@@ -22,18 +22,23 @@ class Carousel extends Component {
         this.setState({ index: prevSlide, direction: 'left' });
     };
 
-    goto(indexButton)  {
-        let indexCourant = this.state.index 
-        let direction = (indexButton > indexCourant) ? 'right' : 'left' 
+    goto(indexButton) {
+        let indexCourant = this.state.index
+        let direction = (indexButton > indexCourant) ? 'right' : 'left'
         this.setState({ index: indexButton, direction: direction });
     };
 
     render() {
-        let indexCourant = this.state.index 
+        let indexCourant = this.state.index
         let buttonsPagination = this.props.imgs.map(function (img, i) {
             let buttonActive = (indexCourant === i) ? 'active' : ''
-            return (<button key={i} onClick={() => this.goto(i)} className={buttonActive}></button>)
+            return (<button key={i} onClick={() => this.goto(i) } className={buttonActive}></button>)
         }.bind(this))
+
+        let imgs = this.props.imgs.map(function (img, i) {
+            let active = (indexCourant === i) ? 'active' : ''
+            return (<img key={i} src={img} className={active} role="presentation" />)
+        })
 
         return (
             <div className="carousel" >
@@ -43,10 +48,10 @@ class Carousel extends Component {
                     transitionLeaveTimeout={500}
                     component="div"
                     className="carousel-slider">
-                    <img key={this.state.index} src={this.props.imgs[this.state.index]} role="presentation"/>
+                    {imgs}
                 </ReactCSSTransitionGroup>
-                <button className="carousel-nav carousel-next" onClick={() => this.next()}></button>
-                <button className="carousel-nav carousel-prev" onClick={() => this.prev()}></button>
+                <button className="carousel-nav carousel-next" onClick={() => this.next() }></button>
+                <button className="carousel-nav carousel-prev" onClick={() => this.prev() }></button>
                 <div className="carousel-pagination">
                     {buttonsPagination}
                 </div>

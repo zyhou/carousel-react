@@ -22,6 +22,11 @@
 
 .carousel-slider img {
     width: 100%;
+    display: none;
+}
+
+.carousel-slider img.active {
+    display: block;
 }
 
 .carousel-pagination {
